@@ -112,6 +112,7 @@ CORS_ALLOWED_ORIGIN_REGEXES = [r"^https://.*\.codeinstitute-ide\.net$",]
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
+    'https://momentswalkthroughreact-dc6cfe212ab0.herokuapp.com',
 ]
 
 CORS_ALLOW_CREDENTIALS = True
