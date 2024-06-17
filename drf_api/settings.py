@@ -62,7 +62,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 DEBUG = 'DEV' in os.environ
 # DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', os.environ.get('ALLOWED_HOST'), '127.0.0.1', '8000-reltoom-dfapiproject5-2b1tujcrgz3.ws.codeinstitute-ide.net']
+ALLOWED_HOSTS = ['localhost', os.environ.get('ALLOWED_HOST'), '127.0.0.1','8000-reltoom-dfapi-1mgi2ot7iih.ws.codeinstitute-ide.net']
 
 
 # Application definition
@@ -112,7 +112,7 @@ CORS_ALLOWED_ORIGIN_REGEXES = [r"^https://.*\.codeinstitute-ide\.net$",]
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
-    'https://momentswalkthroughreact-dc6cfe212ab0.herokuapp.com',
+    'https://meal-share-b5f074a2fcfd.herokuapp.com',
 ]
 
 CORS_ALLOW_CREDENTIALS = True
@@ -149,8 +149,13 @@ if 'DEV' in os.environ:
         }
     }
 else:
+    DATABASE_URL = os.environ.get("DATABASE_URL")
+
+    if DATABASE_URL and isinstance(DATABASE_URL, bytes):
+        DATABASE_URL = DATABASE_URL.decode("utf-8")  # Decode bytes to string if necessary
+
     DATABASES = {
-        'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
+        'default': dj_database_url.parse(DATABASE_URL) if DATABASE_URL else {}
     }
 
 
