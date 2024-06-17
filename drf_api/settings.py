@@ -151,11 +151,11 @@ if 'DEV' in os.environ:
 else:
     DATABASE_URL = os.environ.get("DATABASE_URL")
 
-    if DATABASE_URL:
-        DATABASE_URL = DATABASE_URL.decode("utf-8")  # Decode to string if necessary
+    if DATABASE_URL and isinstance(DATABASE_URL, bytes):
+        DATABASE_URL = DATABASE_URL.decode("utf-8")  # Decode bytes to string if necessary
 
     DATABASES = {
-        'default': dj_database_url.parse(DATABASE_URL)
+        'default': dj_database_url.parse(DATABASE_URL) if DATABASE_URL else {}
     }
 
 
