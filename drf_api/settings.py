@@ -59,8 +59,8 @@ REST_AUTH_SERIALIZERS = {
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = 'DEV' in os.environ
-# DEBUG = True
+#DEBUG = 'DEV' in os.environ
+DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', os.environ.get('ALLOWED_HOST'), '127.0.0.1', '.herokuapp.com', '8000-reltoom-dfapiproject5-2b1tujcrgz3.ws.codeinstitute-ide.net',]
 
@@ -141,22 +141,20 @@ WSGI_APPLICATION = 'drf_api.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-if 'DEV' in os.environ:
+if 'DATABASE_URL' in os.environ:
+    DATABASES = {
+        'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
+    }
+else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         }
     }
-else:
-    DATABASE_URL = os.environ.get("DATABASE_URL")
 
-    if DATABASE_URL and isinstance(DATABASE_URL, bytes):
-        DATABASE_URL = DATABASE_URL.decode("utf-8")  # Decode bytes to string if necessary
 
-    DATABASES = {
-        'default': dj_database_url.parse(DATABASE_URL) if DATABASE_URL else {}
-    }
+
 
 
 # Password validation
