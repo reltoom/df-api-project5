@@ -20,7 +20,11 @@ class Ingredient(models.Model):
         ("pound - lb", "pound - lb"),
         ("ounce - oz", "ounce - oz"),
     )
-    measurement = models.CharField(max_length=50, choices=MEASUREMENT_CHOICES, default="gram - g")
+    measurement = models.CharField(
+        max_length=50,
+        choices=MEASUREMENT_CHOICES,
+        default="gram - g"
+        )
 
     def __str__(self):
         return f"{self.name} ({self.quantity} {self.unit})"
