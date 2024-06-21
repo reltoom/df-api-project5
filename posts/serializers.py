@@ -44,7 +44,8 @@ class PostSerializer(serializers.ModelSerializer):
         ingredients_data = validated_data.pop('ingredients', [])
         post = Post.objects.create(**validated_data)
         for ingredient_data in ingredients_data:
-            Ingredient.objects.create(post=post, **ingredient_data)
+            ingredient = Ingredient.objects.create(**ingredient_data)  # Create each Ingredient instance
+            post.ingredients.add(ingredient)  # Add the ingredient to the post's many-to-many relationship
         return post
 
     class Meta:
