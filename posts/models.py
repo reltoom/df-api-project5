@@ -44,7 +44,7 @@ class Post(models.Model):
     image = models.ImageField(
         upload_to='images/', default='../default_post_kk2xpx', blank=True
     )
-    ingredients = models.ManyToManyField(Ingredient, related_name='posts')
+    ingredients = models.ManyToManyField(Ingredient, related_name='posts', blank=True)
 
     class Meta:
         ordering = ['-created_at']

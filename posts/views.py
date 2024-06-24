@@ -38,7 +38,8 @@ class PostList(generics.ListCreateAPIView):
     ]
 
     def perform_create(self, serializer):
-        serializer.save(owner=self.request.user)
+        ingredients_data = self.request.data.pop('ingredients', [])
+        serializer.save(owner=self.request.user, ingredients=ingredients_data)
 
 
 class PostDetail(generics.RetrieveUpdateDestroyAPIView):

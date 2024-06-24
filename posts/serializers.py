@@ -6,7 +6,7 @@ from likes.models import Like
 class IngredientSerializer(serializers.ModelSerializer):
     class Meta:
         model = Ingredient
-        fields = ['id', 'name', 'quantity', 'measurement']
+        fields = ['name', 'quantity', 'measurement']
 
 
 class PostSerializer(serializers.ModelSerializer):
@@ -46,11 +46,10 @@ class PostSerializer(serializers.ModelSerializer):
         return None
 
     def create(self, validated_data):
-        ingredients_data = self.context['request'].data.get('ingredients', [])
+        ingredients_data = validated_data.pop('ingredients', [])
         post = Post.objects.create(**validated_data)
         for ingredient_data in ingredients_data:
-            ingredient, created = Ingredient.objects.get_or_create(**ingredient_data)
-            post.ingredients.add(ingredient)
+            Ingredient.objects.create(post=post, **ingredient_data)
         return post
 
     class Meta:
