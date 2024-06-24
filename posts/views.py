@@ -17,7 +17,7 @@ class PostList(generics.ListCreateAPIView):
     queryset = Post.objects.annotate(
         likes_count=Count('likes', distinct=True),
         comments_count=Count('comment', distinct=True)
-    ).prefetch_related('ingedients').order_by('-created_at')
+    ).prefetch_related('ingredients').order_by('-created_at')
     filter_backends = [
         filters.OrderingFilter,
         filters.SearchFilter,
@@ -51,4 +51,4 @@ class PostDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Post.objects.annotate(
         likes_count=Count('likes', distinct=True),
         comments_count=Count('comment', distinct=True)
-    ).prefetch_related('ingedients').order_by('-created_at')
+    ).prefetch_related('ingredients').order_by('-created_at')
