@@ -2,7 +2,7 @@ from django.db.models import Count
 from rest_framework import generics, permissions, filters
 from django_filters.rest_framework import DjangoFilterBackend
 from drf_api.permissions import IsOwnerOrReadOnly
-from .models import Post, Ingredient
+from .models import Post
 from .serializers import PostSerializer
 
 
@@ -38,8 +38,7 @@ class PostList(generics.ListCreateAPIView):
     ]
 
     def perform_create(self, serializer):
-        ingredients_data = self.request.data.pop('ingredients', [])
-        serializer.save(owner=self.request.user, ingredients=ingredients_data)
+        serializer.save(owner=self.request.user)
 
 
 class PostDetail(generics.RetrieveUpdateDestroyAPIView):
