@@ -1,7 +1,12 @@
 from rest_framework import serializers
-from posts.models import Post
+from posts.models import Post, Ingredient
 from likes.models import Like
-from ingredients.serializers import IngredientSerializer
+
+
+class IngredientSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Ingredient
+        fields = ['id', 'name', 'quantity', 'measurement']
 
 
 class PostSerializer(serializers.ModelSerializer):
@@ -41,11 +46,11 @@ class PostSerializer(serializers.ModelSerializer):
         return None
 
     def create(self, validated_data):
-        ingredients_data = validated_data.pop('ingredients', [])
+        ingredients_data = self.context['request'].data.get('ingredients', [])
         post = Post.objects.create(**validated_data)
         for ingredient_data in ingredients_data:
-            ingredient = Ingredient.objects.create(**ingredient_data)  # Create each Ingredient instance
-            post.ingredients.add(ingredient)  # Add the ingredient to the post's many-to-many relationship
+            ingredient, created = Ingredient.objects.get_or_create(**ingredient_data)
+            ingredients.add(ingredient)
         return post
 
     class Meta:

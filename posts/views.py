@@ -2,8 +2,7 @@ from django.db.models import Count
 from rest_framework import generics, permissions, filters
 from django_filters.rest_framework import DjangoFilterBackend
 from drf_api.permissions import IsOwnerOrReadOnly
-from .models import Post
-from ingredients.models import Ingredient
+from .models import Post, Ingredient
 from .serializers import PostSerializer
 
 
@@ -17,7 +16,7 @@ class PostList(generics.ListCreateAPIView):
     queryset = Post.objects.annotate(
         likes_count=Count('likes', distinct=True),
         comments_count=Count('comment', distinct=True)
-    ).prefetch_related('ingredients').order_by('-created_at')
+    ).order_by('-created_at')
     filter_backends = [
         filters.OrderingFilter,
         filters.SearchFilter,
@@ -51,4 +50,4 @@ class PostDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Post.objects.annotate(
         likes_count=Count('likes', distinct=True),
         comments_count=Count('comment', distinct=True)
-    ).prefetch_related('ingredients').order_by('-created_at')
+    ).order_by('-created_at')
