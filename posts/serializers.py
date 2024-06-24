@@ -50,7 +50,7 @@ class PostSerializer(serializers.ModelSerializer):
         post = Post.objects.create(**validated_data)
         for ingredient_data in ingredients_data:
             ingredient, created = Ingredient.objects.get_or_create(**ingredient_data)
-            ingredients.add(ingredient)
+            post.ingredients.add(ingredient)
         return post
 
     class Meta:
