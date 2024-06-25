@@ -1,11 +1,6 @@
 from rest_framework import serializers
-from posts.models import Post, Ingredient
+from posts.models import Post
 from likes.models import Like
-
-class IngredientSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Ingredient
-        fields = ('id', 'name', 'quantity', 'measurement')
 
 
 class PostSerializer(serializers.ModelSerializer):
@@ -16,7 +11,6 @@ class PostSerializer(serializers.ModelSerializer):
     like_id = serializers.SerializerMethodField()
     likes_count = serializers.ReadOnlyField()
     comments_count = serializers.ReadOnlyField()
-    ingredients = IngredientSerializer(many=True, required=False)
 
     def validate_image(self, value):
         if value.size > 2 * 1024 * 1024:
@@ -44,18 +38,11 @@ class PostSerializer(serializers.ModelSerializer):
             return like.id if like else None
         return None
 
-    def create(self, validated_data):
-        ingredients_data = validated_data.pop('ingredients')
-        post = Post.objects.create(**validated_data)
-        for ingredient_data in ingredients_data:
-            Ingredient.objects.create(post=post, **ingredient_data)
-        return post
-
     class Meta:
         model = Post
         fields = [
             'id', 'owner', 'is_owner', 'profile_id',
             'profile_image', 'created_at', 'updated_at',
             'recipe_name', 'description', 'image', 'like_id',
-            'likes_count', 'comments_count', 'ingredients',
+            'likes_count', 'comments_count',
         ]
