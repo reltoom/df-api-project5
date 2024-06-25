@@ -62,7 +62,8 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 #DEBUG = 'DEV' in os.environ
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', os.environ.get('ALLOWED_HOST'), '127.0.0.1', '.herokuapp.com', '8000-reltoom-dfapiproject5-2b1tujcrgz3.ws.codeinstitute-ide.net',]
+ALLOWED_HOSTS = ['localhost', os.environ.get('ALLOWED_HOST'), '127.0.0.1', '.herokuapp.com',
+    '8000-reltoom-dfapiproject5-2b1tujcrgz3.ws.codeinstitute-ide.net', 'https://github.com/reltoom/df-api-project5',]
 
 
 # Application definition

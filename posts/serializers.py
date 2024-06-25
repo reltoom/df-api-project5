@@ -5,7 +5,7 @@ from likes.models import Like
 class IngredientSerializer(serializers.ModelSerializer):
     class Meta:
         model = Ingredient
-        fields = ('name', 'quantity', 'measurement')
+        fields = ('id', 'name', 'quantity', 'measurement')
 
 
 class PostSerializer(serializers.ModelSerializer):
@@ -16,7 +16,7 @@ class PostSerializer(serializers.ModelSerializer):
     like_id = serializers.SerializerMethodField()
     likes_count = serializers.ReadOnlyField()
     comments_count = serializers.ReadOnlyField()
-    ingredients = IngredientSerializer(many=True, source='ingredients.all')
+    ingredients = IngredientSerializer(many=True, required=False)
 
     def validate_image(self, value):
         if value.size > 2 * 1024 * 1024:
@@ -45,28 +45,11 @@ class PostSerializer(serializers.ModelSerializer):
         return None
 
     def create(self, validated_data):
-        ingredients_data = validated_data.pop('ingredients', [])
+        ingredients_data = validated_data.pop('ingredients')
         post = Post.objects.create(**validated_data)
         for ingredient_data in ingredients_data:
             Ingredient.objects.create(post=post, **ingredient_data)
         return post
-
-    def update(self, instance, validated_data):
-        ingredients_data = validated_data.pop('ingredients', [])
-        instance = super().update(instance, validated_data)
-        current_ingredient_ids = instance.ingredients.values_list('id', flat=True)
-        for ingredient_data in ingredients_data:
-            if 'id' in ingredient_data:
-                ingredient = Ingredient.objects.get(id=ingredient_data['id'], post=instance)
-                ingredient.name = ingredient_data.get('name', ingredient.name)
-                ingredient.quantity = ingredient_data.get('quantity', ingredient.quantity)
-                ingredient.measurement = ingredient_data.get('measurement', ingredient.measurement)
-                ingredient.save()
-            else:
-                Ingredient.objects.create(post=instance, **ingredient_data)
-        # Delete ingredients not included in ingredients_data
-        instance.ingredients.exclude(id__in=current_ingredient_ids).delete()
-        return instance
 
     class Meta:
         model = Post

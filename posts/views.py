@@ -5,7 +5,6 @@ from drf_api.permissions import IsOwnerOrReadOnly
 from .models import Post
 from .serializers import PostSerializer
 
-
 class PostList(generics.ListCreateAPIView):
     """
     List posts or create a post if logged in
@@ -38,13 +37,7 @@ class PostList(generics.ListCreateAPIView):
     ]
 
     def perform_create(self, serializer):
-        ingredients_data = self.request.data.pop('ingredients', [])
-        serializer = PostSerializer(data=self.request.data)
-        serializer.is_valid(raise_exception=True)
-        post = serializer.save(owner=self.request.user)
-
-        for ingredient_data in ingredients_data:
-            Ingredient.objects.create(post=post, **ingredient_data)
+        serializer.save(owner=self.request.user)
 
 
 class PostDetail(generics.RetrieveUpdateDestroyAPIView):
@@ -58,16 +51,3 @@ class PostDetail(generics.RetrieveUpdateDestroyAPIView):
         comments_count=Count('comment', distinct=True)
     ).order_by('-created_at')
 
-    def perform_update(self, serializer):
-        ingredients_data = self.request.data.pop('ingredients', [])
-        instance = serializer.save()
-
-        # Clear existing ingredients and create new ones
-        instance.ingredients.all().delete()
-        for ingredient_data in ingredients_data:
-            Ingredient.objects.create(post=instance, **ingredient_data)
-
-    def perform_destroy(self, instance):
-        # Delete associated ingredients when deleting a post
-        instance.ingredients.all().delete()
-        instance.delete()
