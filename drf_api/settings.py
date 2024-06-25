@@ -115,6 +115,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     'https://meal-share-b5f074a2fcfd.herokuapp.com',
     'https://github.com/reltoom/df-api-project5',
+    "https://3000-reltoom-mealshare-ioozowdusnk.ws.codeinstitute-ide.net",
 ]
 
 CORS_ALLOW_CREDENTIALS = True
