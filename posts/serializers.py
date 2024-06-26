@@ -44,6 +44,6 @@ class PostSerializer(serializers.ModelSerializer):
             'id', 'owner', 'is_owner', 'profile_id',
             'profile_image', 'created_at', 'updated_at',
             'recipe_name', 'description', 'image', 'like_id',
-            'likes_count', 'comments_count', 'ingredient_name',
-            'ingredient_quantity', 'ingredient_measurement'
+            'likes_count', 'comments_count', 'ingredients',
+            'directions', 'meals',
         ]
