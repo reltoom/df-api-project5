@@ -7,7 +7,7 @@ class Post(models.Model):
     Post model, related to 'owner', i.e. a User instance.
     Default image set so that we can always reference image.url.
     """
-    MEAL_CHOICES =(
+    MEAL_CHOICES = (
         ("breakfast", "breakfast"),
         ("lunch", "lunch"),
         ("dinner", "dinner"),
@@ -26,8 +26,11 @@ class Post(models.Model):
     )
     directions = models.TextField(blank=True)
     ingredients = models.TextField(blank=True)
-    meals = models.CharField(max_length=50, choices=MEAL_CHOICES, default='lunch')
-
+    meals = models.CharField(
+        max_length=50,
+        choices=MEAL_CHOICES,
+        default='lunch'
+        )
 
     class Meta:
         ordering = ['-created_at']

@@ -59,11 +59,16 @@ REST_AUTH_SERIALIZERS = {
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-#DEBUG = 'DEV' in os.environ
 DEBUG = 'DEV' in os.environ
 
-ALLOWED_HOSTS = ['localhost', os.environ.get('ALLOWED_HOST'), '127.0.0.1', '.herokuapp.com',
-    '8000-reltoom-dfapiproject5-2b1tujcrgz3.ws.codeinstitute-ide.net', 'https://codeinstitute-ide.net/start/#reltoom-dfapiproject5-2b1tujcrgz3',]
+ALLOWED_HOSTS = [
+    'localhost',
+    os.environ.get('ALLOWED_HOST'),
+    '127.0.0.1',
+    '.herokuapp.com',
+    '8000-reltoom-dfapiproject5-2b1tujcrgz3.ws.codeinstitute-ide.net',
+    'https://codeinstitute-ide.net/start/#reltoom-dfapiproject5-2b1tujcrgz3',
+]
 
 
 # Application definition
@@ -110,7 +115,7 @@ MIDDLEWARE = [
 if "CLIENT_ORIGIN" in os.environ:
     CORS_ALLOWED_ORIGINS = [os.environ.get("CLIENT_ORIGIN")]
 
-CORS_ALLOWED_ORIGIN_REGEXES = [r"^https://.*\.codeinstitute-ide\.net$",]
+CORS_ALLOWED_ORIGIN_REGEXES = [r"^https://.*\.codeinstitute-ide\.net$", ]
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
@@ -156,25 +161,25 @@ else:
         }
     }
 
-
-
-
-
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME': 'django.contrib.auth.'
+        'password_validation.UserAttributeSimilarityValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'NAME': 'django.contrib.auth.'
+        'password_validation.MinimumLengthValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'NAME': 'django.contrib.auth.'
+        'password_validation.CommonPasswordValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME': 'django.contrib.auth.'
+        'password_validation.NumericPasswordValidator',
     },
 ]
 

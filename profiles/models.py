@@ -12,7 +12,7 @@ class Profile(models.Model):
     image = models.ImageField(
         upload_to='images/', default='../default_profile_fkbq0f'
     )
-    
+
     class Meta:
         ordering = ['-created_at']
 
@@ -23,5 +23,6 @@ class Profile(models.Model):
 def create_profile(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(owner=instance)
+
 
 post_save.connect(create_profile, sender=User)

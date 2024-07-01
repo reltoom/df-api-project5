@@ -3,6 +3,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 from .models import Book
 from .serializers import BookSerializer
 
+
 class BookListCreate(generics.ListCreateAPIView):
     """
     List books or create a book if logged in.
@@ -15,6 +16,7 @@ class BookListCreate(generics.ListCreateAPIView):
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
+
 
 class BookDetail(generics.RetrieveUpdateDestroyAPIView):
     """

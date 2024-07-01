@@ -5,6 +5,7 @@ from drf_api.permissions import IsOwnerOrReadOnly
 from .models import Post
 from .serializers import PostSerializer
 
+
 class PostList(generics.ListCreateAPIView):
     """
     List posts or create a post if logged in
@@ -51,4 +52,3 @@ class PostDetail(generics.RetrieveUpdateDestroyAPIView):
         likes_count=Count('likes', distinct=True),
         comments_count=Count('comment', distinct=True)
     ).order_by('-created_at')
-
