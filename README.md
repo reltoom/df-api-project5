@@ -1,114 +1,136 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# Meal Share Backend drf.
 
-Welcome Ariel Toom,
+This is my Back-End Django REST Framework for my PP5, Meal Share. 
 
-This is the Code Institute student template for Gitpod. We have preinstalled all of the tools you need to get started. It's perfectly ok to use this template as the basis for your project submissions.
+Visit the deployed Back-End here: [Meal Share Back-End](https://df-api-project5-f27c63867984.herokuapp.com/)
+    - This would mainly be to log in as admin to the site.
 
-You can safely delete this README.md file or change it for your own project. Please do read it at least once, though! It contains some important information about Gitpod and the extensions we use. Some of this information has been updated since the video content was created. The last update to this file was: **May 28, 2024**
+## CONTENTS
 
-## Gitpod Reminders
+* [User Experience](#user-experience-ux)
+  * [Planning Process](#planning-process)
+  * [Design](#design)
+* [Features](#features)
+* [Technologies](#technologies)
+  * [Languages](#languages)
+  * [Websites & Programs](#websites-programs)
+* [Deployment](#deployment)
+* [Testing](#testing)
+   * [Manual Testing](#manual-testing)
+   * [Validator Test](#validator-test)
+* [Credits](#credits)
+  * [Code Used](#code-used)
+  * [Acknowledgments](#acknowledgments)
 
-To run a frontend (HTML, CSS, Javascript only) application in Gitpod, in the terminal, type:
+## User Experience (UX)
 
-`python3 -m http.server`
 
-A blue button should appear to click: _Make Public_,
+## Planning Process
 
-Another blue button should appear to click: _Open Browser_.
 
-To run a backend Python file, type `python3 app.py` if your Python file is named `app.py`, of course.
+## Design
 
-A blue button should appear to click: _Make Public_,
+The base layout/design is used from the walkthrough project 'I Think Therefor I Blog' and Crispy Forms. I did customize most aspects of Character Share to better suit my wants for the site.
 
-Another blue button should appear to click: _Open Browser_.
+## Features
 
-By Default, Gitpod gives you superuser security privileges. Therefore, you do not need to use the `sudo` (superuser do) command in the bash terminal in any of the lessons.
+### Admin Panel
+A superuser can log into the admin panel by going to the main page and appending a /admin and then logging in.
+Here the admin can edit, delete, and add everthing. 
 
-To log into the Heroku toolbelt CLI:
+<details><summary><b>Admin Panel</b></summary>
 
-1. Log in to your Heroku account and go to *Account Settings* in the menu under your avatar.
-2. Scroll down to the *API Key* and click *Reveal*
-3. Copy the key
-4. In Gitpod, from the terminal, run `heroku_config`
-5. Paste in your API key when asked
+![Adminpanel](static/images/readme/adminpanel.png)
 
-You can now use the `heroku` CLI program - try running `heroku apps` to confirm it works. This API key is unique and private to you, so do not share it. If you accidentally make it public, you can create a new one with _Regenerate API Key_.
+</details><br/>
 
-------
+## Technologies 
 
-## Release History
+### Languages 
 
-We continually tweak and adjust this template to help give you the best experience. Here is the version history:
+* Python -Provides the functionality for the Character Share.
+* HTML5 - Provides the content and structure for the Character Share.
+* CSS - Provides the styling for the Character Share.
+* JavaScript - Provides interactive elements of the Character Share.
+* React - Frontend
 
-**May 28 2024:** Fix Mongo and Links installs
+###  Websites & Programs 
+* [Bootstrap](https://getbootstrap.com/) - Build fas, responsive sites with this frontend toolkit.
+* [Django](https://www.djangoproject.com/) - Framework for building apps quickly and with less code.
+* [Balsamiq](https://balsamiq.com/) - For wireframes.
+* [Chatgpt](https://chat.openai.com/) - Used to help identify problems in code and possible way to solve them.
+* [Github](https://github.com/) - Created repository and stored files here after commits. Users Stories and project board.
+* [Heroku](https://heroku.com/) - For deploying Character Share.
+* [Microsoft Visual Studio](https://visualstudio.microsoft.com/) - Wrote code and did commits to Github from here.
+* [W3 School](https://www.w3schools.com/) Read and used as a guide for some code.
+* [DjangoREST framework](https://www.django-rest-framework.org/)Guide and reference for code.
 
-**April 26 2024:** Update node version to 16
+## Deployment 
+Here I will describe the deployment procedure for the Back-End part of my project.
 
-**September 20 2023:** Update Python version to 3.9.17.
+1. Creating a Code Institue database.
+    * By entering my email to the CI database creator, a database was created for me.  [CI databasemaker](https://dbs.ci-dbs.net/)
+    * Following the link sent to my email, shows the created database.
+    * Most important part you will need is the Database URL, click the info button to copy that for later.
+2. Setting up Heroku App.
+    * Log into your Heroku account and go to the Dashboard.
+    * Click 'New' --- 'Create new app'
+    * Choose a unique name for your app and your region, then click 'Create App'.
+    * Now go to the Setting tab of app. and click on the 'Reveal Cofig Vars'.
+    * In the Key field enter 'DATABASE_URL' and for the Value paste your database URl without the quotes.
+    * Click the 'Add' button to add it to the Config Vars.
+3. Prepare your project in your IDE.
+    * In the terminal in your project file, install dj_database_url and psycopg2 by typing: "pip3 install dj_database_url==0.5.0 psycopg2".
+    * In the setting.py file, import dj_database_url underneath the import for os.
+    * Update the Databases section to look like the following:  [Databases](readme_assets/images/dburl.png)
+    * Create the env.py file if you do not have it. Now add a new environment variable with a key set to DATABASE_URL and the value as your database URL from earlier. code should be like so: " os.environ['DATABASE_URL'] = "<your PostgreSQL URL here>"
+    * Migrate your database with: "python manage.py makemigrations" then: "python manage.py migrate".
+    * To check that your database is connected and working, create a superuser: "python manage.py createsuperuser" --- To get to the admin panel append a "/admin" to the end of the url when running server.
+4. Preparing code to be able to deploy on Heroku.
+    * In order to be able to deploy to Heroku, we need several packages and files.
+    * In the terminal install gunicorn: "pip3 install gunicorn django-cors-headers", and update your requirement.txt afterward: "pip freeze --local > requirements.txt".
+    * Create a Procfile(which is required by Heroku) and insert the following: first line - "release: python manage.py makemigrations && python manage.py migrate" second line - "web: gunicorn drf_api.wsgi".
+    * In settings.py update the ALLOWED_HOSTS to include your Heroku app's URl like so: " ALLOWED_HOSTS = ['localhost', '<your_app_name>.herokuapp.com']".
+    * In settings.py add 'corsheaders' to INSTALLED_APPS and then add 'corsheaders.middleware.CorsMiddleware' to the top of the MIDDLEWARE.
+    * In settings.py underneath MIDDLEWARE, add the following for network requests: [CORS_ALLOWED](readme_assets/images/cors.png)
 
-**September 1 2021:** Remove `PGHOSTADDR` environment variable.
 
-**July 19 2021:** Remove `font_fix` script now that the terminal font issue is fixed.
 
-**July 2 2021:** Remove extensions that are not available in Open VSX.
+#### How to Fork in Github
 
-**June 30 2021:** Combined the P4 and P5 templates into one file, added the uptime script. See the FAQ at the end of this file.
+If you want to fork this repository in Github:
 
-**June 10 2021:** Added: `font_fix` script and alias to fix the Terminal font issue
+1. Go to the repository for this project [Character Share](https://github.com/reltoom/Character-Ideas).
+2. In the upper right hand area of the screen, click the 'Fork' button.
+3. Then when the menu drops down, click 'Create New Fork'. (If you are the owner of a repository, you cannot fork.) 
 
-**May 10 2021:** Added `heroku_config` script to allow Heroku API key to be stored as an environment variable.
+#### How to Clone in Github
 
-**April 7 2021:** Upgraded the template for VS Code instead of Theia.
+If you want to clone this repository:
 
-**October 21 2020:** Versions of the HTMLHint, Prettier, Bootstrap4 CDN and Auto Close extensions updated. The Python extension needs to stay the same version for now.
+1. Go to the repository for this project [Character Share](https://github.com/reltoom/Character-Ideas).
+3. Click on the green 'Code' button and then select how you would like to clone: HTTPS, SSH or GitHub CLI (under the 'local' tab). 
+4. Either copy the desired code or click to open with another program from the list below the code.
+4. Open your code editor and go to 'Clone Repository' usually under 'File'.
+5. Paste if your code and then 'Clone'.
 
-**October 08 2020:** Additional large Gitpod files (`core.mongo*` and `core.python*`) are now hidden in the Explorer, and have been added to the `.gitignore` by default.
+## Testing
+## Manual Testing
 
-**September 22 2020:** Gitpod occasionally creates large `core.Microsoft` files. These are now hidden in the Explorer. A `.gitignore` file has been created to make sure these files will not be committed, along with other common files.
+## Validator Test
 
-**April 16 2020:** The template now automatically installs MySQL instead of relying on the Gitpod MySQL image. The message about a Python linter not being installed has been dealt with, and the set-up files are now hidden in the Gitpod file explorer.
+[Pep8 Python Validator](https://pep8ci.herokuapp.com/) 
 
-**April 13 2020:** Added the _Prettier_ code beautifier extension instead of the code formatter built-in to Gitpod.
+[W3C](https://validator.w3.org/) 
 
-**February 2020:** The initialisation files now _do not_ auto-delete. They will remain in your project. You can safely ignore them. They just make sure that your workspace is configured correctly each time you open it. It will also prevent the Gitpod configuration popup from appearing.
+[JShint](https://jshint.com/) 
 
-**December 2019:** Added Eventyret's Bootstrap 4 extension. Type `!bscdn` in a HTML file to add the Bootstrap boilerplate. Check out the <a href="https://github.com/Eventyret/vscode-bcdn" target="_blank">README.md file at the official repo</a> for more options.
 
-------
+## Credits
 
-## FAQ about the uptime script
+### Code Used
 
-**Why have you added this script?**
 
-It will help us to calculate how many running workspaces there are at any one time, which greatly helps us with cost and capacity planning. It will help us decide on the future direction of our cloud-based IDE strategy.
+### Acknowledgments
 
-**How will this affect me?**
-
-For everyday usage of Gitpod, it doesn’t have any effect at all. The script only captures the following data:
-
-- An ID that is randomly generated each time the workspace is started.
-- The current date and time
-- The workspace status of “started” or “running”, which is sent every 5 minutes.
-
-It is not possible for us or anyone else to trace the random ID back to an individual, and no personal data is being captured. It will not slow down the workspace or affect your work.
-
-**So….?**
-
-We want to tell you this so that we are being completely transparent about the data we collect and what we do with it.
-
-**Can I opt out?**
-
-Yes, you can. Since no personally identifiable information is being captured, we'd appreciate it if you let the script run; however if you are unhappy with the idea, simply run the following commands from the terminal window after creating the workspace, and this will remove the uptime script:
-
-```
-pkill uptime.sh
-rm .vscode/uptime.sh
-```
-
-**Anything more?**
-
-Yes! We'd strongly encourage you to look at the source code of the `uptime.sh` file so that you know what it's doing. As future software developers, it will be great practice to see how these shell scripts work.
-
----
-
-Happy coding!
+Thank you to my daughter and wife for helping support me through my studies.
