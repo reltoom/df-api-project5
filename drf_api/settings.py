@@ -60,7 +60,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 #DEBUG = 'DEV' in os.environ
-DEBUG = True
+DEBUG = 'DEV' in os.environ
 
 ALLOWED_HOSTS = ['localhost', os.environ.get('ALLOWED_HOST'), '127.0.0.1', '.herokuapp.com',
     '8000-reltoom-dfapiproject5-2b1tujcrgz3.ws.codeinstitute-ide.net', 'https://codeinstitute-ide.net/start/#reltoom-dfapiproject5-2b1tujcrgz3',]

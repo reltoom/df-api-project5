@@ -92,7 +92,21 @@ Here I will describe the deployment procedure for the Back-End part of my projec
     * Create a Procfile(which is required by Heroku) and insert the following: first line - "release: python manage.py makemigrations && python manage.py migrate" second line - "web: gunicorn drf_api.wsgi".
     * In settings.py update the ALLOWED_HOSTS to include your Heroku app's URl like so: " ALLOWED_HOSTS = ['localhost', '<your_app_name>.herokuapp.com']".
     * In settings.py add 'corsheaders' to INSTALLED_APPS and then add 'corsheaders.middleware.CorsMiddleware' to the top of the MIDDLEWARE.
-    * In settings.py underneath MIDDLEWARE, add the following for network requests: [CORS_ALLOWED](readme_assets/images/cors.png)
+    * In settings.py underneath MIDDLEWARE, add the following for network requests: [CORS_ALLOWED](readme_assets/images/cors.png) Replace URLs with your own URLs.
+    * Since front end and my Back-End are separate, you need add code to make cookies work. Add the following: [JWT](readme_assets/images/jwt.png)
+    * In settings.py, replace the value of SECRET_KEY with: "= os.getenv('SECRET_KEY').
+    * In your env.py create a new environment vairable for SECRET_KEY: 'os.environ.setdefault("SECRET_KEY", "CreateyourownsecretkeyhereCanbeANYTHING")'
+    * In settings.py set debug to be True only if the Dev env. varibable exists. This means it is True in development, and False in production if set like this: "DEBUG = 'DEV' in os.environ" and in env.py "os.environ['DEV'] = '1'".
+    * Update requirements.txt again and then add, commit and push to GitHub.
+5. Deploying on Heroku
+    * Go to you app on Heroku and then the Settings tab, open up the Config Vars. Add to it your SECRET_KEY, CLOUDINARY_URL, and DISABLE_COLLECTSTATIC if it is not there yet. For future, when you connect your Back-End to your Front-End, you can add CLIENT_ORIGIN. So the Config Vars should look like this: [Config Vars](readme_assets/images/configs.png).
+    * The SECRET_KEY value is the one you created in your env.py file.
+    * CLOUDINARY_URL value is the one you should have in your env.py after you installed Cloudinary to your project.
+    * The CLIENT_ORIGIN value will the the url for the deployed front end.
+    * In Heroku, go the the Deploy tab and under Deployement Method, click to connect to your Github account.
+    * Search for you Back-End repo and then 'Connect'
+    * Click the 'Manual Deploy' to deploy manually after every update on GitHub, or you can activate the 'Automatic Deployement' which will try to deploy after every new push to GitHub.
+    * Now that it is deployed, you can click on the 'Open App' button in the top right hand off the screen in Heroku.
 
 
 
