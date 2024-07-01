@@ -7,10 +7,7 @@ Visit the deployed Back-End here: [Meal Share Back-End](https://df-api-project5-
 
 ## CONTENTS
 
-* [User Experience](#user-experience-ux)
-  * [Planning Process](#planning-process)
-  * [Design](#design)
-* [Features](#features)
+* [Planning Of Models](#planning-of-models)
 * [Technologies](#technologies)
   * [Languages](#languages)
   * [Websites & Programs](#websites-programs)
@@ -22,48 +19,24 @@ Visit the deployed Back-End here: [Meal Share Back-End](https://df-api-project5-
   * [Code Used](#code-used)
   * [Acknowledgments](#acknowledgments)
 
-## User Experience (UX)
-
-
-## Planning Process
-
-
-## Design
-
-The base layout/design is used from the walkthrough project 'I Think Therefor I Blog' and Crispy Forms. I did customize most aspects of Character Share to better suit my wants for the site.
-
-## Features
-
-### Admin Panel
-A superuser can log into the admin panel by going to the main page and appending a /admin and then logging in.
-Here the admin can edit, delete, and add everthing. 
-
-<details><summary><b>Admin Panel</b></summary>
-
-![Adminpanel](static/images/readme/adminpanel.png)
-
-</details><br/>
+## Planning of Models
+My ERD which I planned out for my Models [ERD](readme_assets/images/erd.png)
 
 ## Technologies 
 
-### Languages 
-
-* Python -Provides the functionality for the Character Share.
-* HTML5 - Provides the content and structure for the Character Share.
-* CSS - Provides the styling for the Character Share.
-* JavaScript - Provides interactive elements of the Character Share.
-* React - Frontend
+### Languages
+For Meal Share Back-end
+* Python - Used to create my Back-End code.
 
 ###  Websites & Programs 
-* [Bootstrap](https://getbootstrap.com/) - Build fas, responsive sites with this frontend toolkit.
-* [Django](https://www.djangoproject.com/) - Framework for building apps quickly and with less code.
-* [Balsamiq](https://balsamiq.com/) - For wireframes.
-* [Chatgpt](https://chat.openai.com/) - Used to help identify problems in code and possible way to solve them.
-* [Github](https://github.com/) - Created repository and stored files here after commits. Users Stories and project board.
-* [Heroku](https://heroku.com/) - For deploying Character Share.
+
+* [DjangoREST framework](https://www.django-rest-framework.org/)Guide and reference for code.
+* [Github](https://github.com/) - Created repository and stored files here after commits. 
+* [Heroku](https://heroku.com/) - For deploying both the Back-End and Front-End of Meal Share.
 * [Microsoft Visual Studio](https://visualstudio.microsoft.com/) - Wrote code and did commits to Github from here.
 * [W3 School](https://www.w3schools.com/) Read and used as a guide for some code.
-* [DjangoREST framework](https://www.django-rest-framework.org/)Guide and reference for code.
+* [Chatgpt](https://chat.openai.com/) - Used to help identify problems in code and possible way to solve them.
+* [Visual Paradigm](https://online.visual-paradigm.com/) - Used to draw my ERD diagram digitally
 
 ## Deployment 
 Here I will describe the deployment procedure for the Back-End part of my project.
@@ -109,12 +82,11 @@ Here I will describe the deployment procedure for the Back-End part of my projec
     * Now that it is deployed, you can click on the 'Open App' button in the top right hand off the screen in Heroku.
 
 
-
 #### How to Fork in Github
 
 If you want to fork this repository in Github:
 
-1. Go to the repository for this project [Character Share](https://github.com/reltoom/Character-Ideas).
+1. Go to the repository for this project [df-api-project5](https://github.com/reltoom/df-api-project5).
 2. In the upper right hand area of the screen, click the 'Fork' button.
 3. Then when the menu drops down, click 'Create New Fork'. (If you are the owner of a repository, you cannot fork.) 
 
@@ -122,7 +94,7 @@ If you want to fork this repository in Github:
 
 If you want to clone this repository:
 
-1. Go to the repository for this project [Character Share](https://github.com/reltoom/Character-Ideas).
+1. Go to the repository for this project [df-api-project5](https://github.com/reltoom/df-api-project5).
 3. Click on the green 'Code' button and then select how you would like to clone: HTTPS, SSH or GitHub CLI (under the 'local' tab). 
 4. Either copy the desired code or click to open with another program from the list below the code.
 4. Open your code editor and go to 'Clone Repository' usually under 'File'.
@@ -131,20 +103,27 @@ If you want to clone this repository:
 ## Testing
 ## Manual Testing
 
+| | |
+|:-------:|:--------|
+|  |  |
+|  |  |
+|  |  |
+|  |  |
+|  |  |
+|  |  |
+|  |  |
+|  |  |
+|  |  |
+
+
 ## Validator Test
-
-[Pep8 Python Validator](https://pep8ci.herokuapp.com/) 
-
-[W3C](https://validator.w3.org/) 
-
-[JShint](https://jshint.com/) 
-
+I have run this Back-End project through validator testing.
+[Pep8 Python Validator](https://pep8ci.herokuapp.com/) -- All clear, no errors were found in my python code.
 
 ## Credits
 
 ### Code Used
-
+I used the Back-End code from the Moments walkthrough and then changed it to fit Meal Share. 
 
 ### Acknowledgments
-
 Thank you to my daughter and wife for helping support me through my studies.
