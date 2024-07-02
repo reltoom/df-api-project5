@@ -77,7 +77,7 @@ Here I will describe the deployment procedure for the Back-End part of my projec
     * CLOUDINARY_URL value is the one you should have in your env.py after you installed Cloudinary to your project.
     * The CLIENT_ORIGIN value will the the url for the deployed front end.
     * In Heroku, go the the Deploy tab and under Deployement Method, click to connect to your Github account.
-    * Search for you Back-End repo and then 'Connect'
+    * Search for your Back-End repo and then 'Connect'
     * Click the 'Manual Deploy' to deploy manually after every update on GitHub, or you can activate the 'Automatic Deployement' which will try to deploy after every new push to GitHub.
     * Now that it is deployed, you can click on the 'Open App' button in the top right hand off the screen in Heroku.
 
@@ -102,19 +102,25 @@ If you want to clone this repository:
 
 ## Testing
 ## Manual Testing
+<details><summary><b>Manual Testing<b></summary>
 
-| | |
-|:-------:|:--------|
-|  |  |
-|  |  |
-|  |  |
-|  |  |
-|  |  |
-|  |  |
-|  |  |
-|  |  |
-|  |  |
+| | | |
+|:-------:|:--------|:--------|
+| Log in | After creating superuser, log in | Using correct username and password logs the superuser into the API. |
+| Wrong login info | Tried to log it with wrong info | Error messages show that I need to log it with correct username or password. |
+| Admin Page | Appending '/admin' to the end of the url | Takes the superuser to the admin page where it shows all relevant apps: Users, Books, Posts, Profiles etc. |
+| Books | Clicked on Books in admin panel | Shows list of current Books that have been created. Also button for adding a book. |
+| Add Book | Clicked on 'Add book' | Brings up the add book form. Am able to choose which user, Title, Author and Link. Buttons for Save are present and if clicked save the newly created book to the database, shows up in the list of books. Title and Author field are required and will show error messages if left blank. |
+| Book Delete | Click on a book from the book list | Here the admin can edit the book that has been created and save or click the 'Delete' button to delete the book from the database. |
+| Posts | Clicked on Posts in admin panel | Displays a list of posts that have been created(by title) as well as the 'Add Post' button. |
+| Add Post | Click the 'Add Post' button | Takes admin to the add post form. Admin can fill in the form, recipe name is a required field to be able to save post. Saving adds it to the list of Posts |
+| Post Delete | Click on a created Post in the list | Brings up the 'Add Post' form but prefilled with the posts details. Here the admin can edit information about it or click the 'Delete' button which will delete the post from the database. |
+| Profiles | Click the Profiles in the admin panel | Brings up a list of current profiles that users have created. |
+| Add Profile | Click the add profile button | The admin is able to create users, and fill in their profile info and image. Saving it will add the new user to list of users |
+| Delete Profile | Click a current Username in the profile view | This brings up the users profile info to be edited, or 'Delete' button will remove the profile from database. |
 
+The Back-End for Meal Share works as it should.
+</details><br/>
 
 ## Validator Test
 I have run this Back-End project through validator testing.
